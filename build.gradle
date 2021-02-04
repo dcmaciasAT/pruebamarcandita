@@ -21,11 +21,19 @@ micronaut {
 }
 
 dependencies {
-    implementation("io.micronaut:micronaut-validation")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut:micronaut-inject-java")
+    implementation("io.micronaut:micronaut-inject")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    implementation("com.h2database:h2")
     implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-http-client")
-    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.swagger.core.v3:swagger-annotations")
+       runtimeOnly("ch.qos.logback:logback-classic")
 }
 
 
