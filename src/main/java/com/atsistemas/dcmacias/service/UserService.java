@@ -1,48 +1,46 @@
 package com.atsistemas.dcmacias.service;
 
-import java.time.Instant;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
+
 
 import javax.inject.Singleton;
 
-import com.atsistemas.dcmacias.dtos.UserDto;
+import com.atsistemas.dcmacias.dtos.UserDTO;
 
 @Singleton
 public class UserService {
 
-    private Map<Long, UserDto> userCache = new HashMap<>();
+    private Map<Long, UserDTO> userCache = new HashMap<>();
 
-    public UserDto create(String name, String lastName, long phoneNumber) {
-        UserDto user = new UserDto(name, lastName, phoneNumber);
+    public UserDTO create(String name, String lastName, Long phoneNumber) {
+        UserDTO user = new UserDTO();
         userCache.put(phoneNumber, user);
         return user;
     }
 
-    public Optional<UserDto> update(long phone,String name , String lastName) {
-        Optional<UserDto> optUser = findByPhone(phone);
+    public Optional<UserDTO> update(Long phone,String name , String lastName) {
+        Optional<UserDTO> optUser = findByPhone(phone);
         return optUser.map( user -> {
-            user.setName(name);
-            user.setLastName(lastName);
+            user.setUsername(name);
+            user.setLastname(lastName);
             return user;
         });
     }
 
-    public Optional<UserDto> findByPhone(long id) {
+    public Optional<UserDTO> findByPhone(Long id) {
+    	
         return Optional.ofNullable(userCache.get(id));
     }
 
-    public List<UserDto> findAll() {
+    public List<UserDTO> findAll() {
         return new ArrayList<>(userCache.values());
     }
 
-    public Optional<UserDto> remove(String id) {
-        return Optional.ofNullable(userCache.remove(id));
-    }
 
    
 }
