@@ -6,38 +6,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+import java.util.Set;
 
 import javax.inject.Singleton;
 
-import com.atsistemas.dcmacias.dtos.UserDTO;
+import com.atsistemas.dcmacias.domain.Contact;
+import com.atsistemas.dcmacias.domain.User;
 
 @Singleton
 public class UserService {
 
-    private Map<Long, UserDTO> userCache = new HashMap<>();
+    private Map<Long, User> userCache = new HashMap<>();
 
-    public UserDTO create(String name, String lastName, Long phoneNumber) {
-        UserDTO user = new UserDTO();
+    public UserDto create(String name, String lastName, Long phoneNumber) {
+        User user = new User();
         userCache.put(phoneNumber, user);
         return user;
     }
 
-    public Optional<UserDTO> update(Long phone,String name , String lastName) {
-        Optional<UserDTO> optUser = findByPhone(phone);
+    public Optional<User> updateContacts(Long phone,Set<Contact> contacts) {
+        Optional<User> optUser = findByPhone(phone);
         return optUser.map( user -> {
-            user.setUsername(name);
-            user.setLastname(lastName);
+            user.setContacts(contacts);
             return user;
         });
     }
 
-    public Optional<UserDTO> findByPhone(Long id) {
+    public Optional<User> findByPhone(Long id) {
     	
         return Optional.ofNullable(userCache.get(id));
     }
 
-    public List<UserDTO> findAll() {
+    public List<User> findAll() {
         return new ArrayList<>(userCache.values());
     }
 

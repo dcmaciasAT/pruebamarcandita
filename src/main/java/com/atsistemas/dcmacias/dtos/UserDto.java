@@ -3,7 +3,7 @@ package com.atsistemas.dcmacias.dtos;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class UserDTO {
+public class UserDto {
 
     private String username;
     private String lastname;
